@@ -1,0 +1,5 @@
+examples/
+setup.cfg
+*.pyc
+*.smug
+.pypirc
