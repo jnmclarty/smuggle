@@ -3,3 +3,6 @@ setup.cfg
 *.pyc
 *.smug
 .pypirc
+dist/
+smuggle.egg-info/
+MANIFEST
