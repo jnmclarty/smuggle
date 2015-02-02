@@ -13,7 +13,7 @@ setup(
   name = 'smuggle',
   version = '0.1',
   description = 'Log, catalogue, and move python objects via pickling',
-  long_description=(read('README.md')),
+  long_description=(read('README.rst')),
   author = 'Jeffrey McLarty',
   author_email = 'jeffrey.mclarty@gmail.com',
   url = 'https://github.com/jnmclarty/smuggle',
