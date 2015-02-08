@@ -6,3 +6,4 @@ setup.cfg
 dist/
 smuggle.egg-info/
 MANIFEST
+doc/build
