@@ -1,6 +1,9 @@
 Smuggle
 =======
 
+.. image:: https://travis-ci.org/jnmclarty/smuggle.svg?branch=master
+    :target: https://travis-ci.org/jnmclarty/smuggle
+
 *Catalogue python pickles to reduce development and troubleshooting time.*
 
 Description
