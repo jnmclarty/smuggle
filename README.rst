@@ -103,3 +103,12 @@ Instructions for Windows
 1) Make sure you have Python 2.7 and pip installed
 2) Open the command prompt: Start Menu > Accessories > Command Prompt
 3) Run the following command: ``pip install smuggle``
+
+Testing
+=======
+
+.. code::
+   
+   nosetests smuggle
+   
+   py.test --cov=smuggle --cov-report=term --cov-report=html

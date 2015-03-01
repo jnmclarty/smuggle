@@ -121,13 +121,17 @@ class Payload(object):
         tmp = [x[1] for x in tmp]
         
         return tmp
-    def destroy(self,objnames=['ALLVARS']):
+    def destroy(self,objnames=['ALLVARS'],verbose=True):
         """delete old pickle files from disk"""
+        num = 0
         for f in os.listdir(self.folder):
             if f.endswith(".smug"):
                 if objnames[0] == 'ALLVARS' or startswithany(f,objnames):
-                    print self.folder + "\\" + f
+                    if verbose:
+                        print self.folder + "\\" + f
                     os.remove(self.folder + "\\" + f)
+                    num += 1
+        return num
 
 class Contraband(object):
     """

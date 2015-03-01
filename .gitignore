@@ -7,3 +7,6 @@ dist/
 smuggle.egg-info/
 MANIFEST
 doc/build
+*__pycache__*
+htmlcov/
+.coverage
