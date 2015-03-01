@@ -48,13 +48,17 @@ class Payload(object):
                     #print "Doing {}".format(f)
                     varname, date, post = parsefname(f)
                     #print varname, date, post
-                    var = pickle.load(open(folder + "\\" + f,"rb+"))
+                    var = pickle.load(open(os.path.join(folder,f),"rb"))
                     c = Contraband(varname, var)
                     c.setdate(date)
                     c.setfname(varname, post)
                     c.setfpath(folder)
                     self.cargo.append(c)
-                    
+        
+        #TODO Make Smuggle work with seconds
+        #for c in self.cargo:
+        #    print c.dt
+            
     def passphrases(self):
         """
         Returns a string, which is executable python code.
@@ -128,8 +132,8 @@ class Payload(object):
             if f.endswith(".smug"):
                 if objnames[0] == 'ALLVARS' or startswithany(f,objnames):
                     if verbose:
-                        print self.folder + "\\" + f
-                    os.remove(self.folder + "\\" + f)
+                        print os.path.join(self.folder,f)
+                    os.remove(os.path.join(self.folder,f))
                     num += 1
         return num
 
@@ -167,13 +171,10 @@ class Contraband(object):
         self.fname = "-".join(tmp) + ".smug"
         self.setfout()
     def setfpath(self,p):
-        if p[-1] == '\\':
-            self.fpath = p
-        else:
-            self.fpath = p + "\\"
+        self.fpath = p
         self.setfout()
     def setfout(self):
-        self.fout = self.fpath + self.fname
+        self.fout = os.path.join(self.fpath,self.fname)
     def getpassphrase(self):
         dtls = (self.name,type(self.obj).__name__,self.dt_human)
         msg = "# {0} of type '{1}' was smuggled at {2}".format(*dtls)
@@ -212,7 +213,7 @@ class Smuggler(object):
     """  
     def __init__(self,folder=None,post=""):
         #TODO make this more flexible, and work for all operating systems.
-        self.folder = folder or os.getcwd() + r'\contraband'
+        self.folder = folder or os.join(os.getcwd(),'contraband')
         self.post = post
 
         if self.folder[-1] == '\\':
@@ -233,10 +234,12 @@ class Smuggler(object):
         """
         
         for varname,var in kwargs.iteritems():
+            #print "Trying to write var {}".format(varname)
             c = Contraband(varname,var)
             c.setfname(post=self.post)
             c.setfpath(self.folder)
-            pickle.dump(var,open(c.fout,'wb+'))
+            pickle.dump(var,open(c.fout,'wb'))
+            #print "Sucessfully wrote pickle : {}".format(c.fout)
             self.payload.cargo.append(c)
         return self
     def flushpassphrases(self):
