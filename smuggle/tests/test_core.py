@@ -29,10 +29,7 @@ def test_smuggle():
     for i,(line,exp) in enumerate(zip(lines,exp_out)):
         if line != exp:
             raise Exception("Line {}, {} != {}".format(i+1,line,exp))
-    
-    
 
-        
 if __name__ == '__main__':
     nose.runmodule(argv=[__file__, '-vvs', '-x'],#, '--pdb-failure'],
                    exit=False)    
