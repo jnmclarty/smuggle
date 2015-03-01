@@ -34,13 +34,13 @@ class SmugglerTests(TestCase):
         exp_file = os.path.join(self.testdir,"x-" + dfmt2) + ".smug"
         
         exp_out = \
-            ["# x of type 'list' was smuggled at {}".format(dfmt1),
+            ["# x of type 'list' was smuggled at {0}".format(dfmt1),
              "#   [1, 2, 3]",
-             'x = pickle.load(open(r"{}","rb"))'.format(exp_file)]
+             'x = pickle.load(open(r"{0}","rb"))'.format(exp_file)]
                         
         for i,(line,exp) in enumerate(zip(lines,exp_out)):
             if line != exp:
-                raise Exception("Line {}, {} != {}".format(i+1,line,exp))
+                raise Exception("Line {0}, {1} != {2}".format(i+1,line,exp))
 
     def test_payload(self):
         
@@ -61,7 +61,7 @@ class SmugglerTests(TestCase):
         msg = "Problem testing payloads"
 
         def sorteddictoflists(d):
-            for key in d.keys():
+            for key in list(d.keys()):
                 d[key] = [item for sublist in d[key] for item in sublist]
                 d[key].sort()
             return d
@@ -69,7 +69,7 @@ class SmugglerTests(TestCase):
         exp = sorteddictoflists({'x' : [x,a], 'y' : [y,b]})
         act = sorteddictoflists(p.asvardict())
         
-        self.assertDictEqual(exp,act,msg)
+        self.assertEqual(exp,act,msg)
                              
         exp = [x, y, a, b]
         act = p.aslist()
@@ -77,10 +77,13 @@ class SmugglerTests(TestCase):
         exp = [item for sublist in exp for item in sublist]
         act = [item for sublist in act for item in sublist]
         
+        exp = [str(ex) for ex in exp]
+        act = [str(ac) for ac in act]
+        
         exp.sort()
         act.sort()
         
-        self.assertListEqual(exp,act,msg)
+        self.assertEqual(exp,act,msg)
 
     def test_payload_destroy(self):
         

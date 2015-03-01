@@ -6,12 +6,8 @@ from datetime import datetime as dt
 
 #TODO Rebuild all with SQLite
 #TODO Enable more options for passphrase output
-#TODO Make this OS-independent
-#TODO Make this compatible with more than just Python 2.7
 #TODO Documentation
 #TODO Organize the module and use __init__ better
-#TODO Implement a testing plan
-#TODO Implement Travis-CI support
 #TODO Implement Coveralls
 #TODO Make exception-pretty output
 #TODO Enable other time-date formats
@@ -80,7 +76,7 @@ class Payload(object):
         for c in self.cargo:
             tmp[c.name].append((c.dt,c.obj))
         
-        for varname in tmp.keys():
+        for varname in list(tmp.keys()):
             tmp[varname] = sorted(tmp[varname],key=lambda x: x[0])
             tmp[varname] = [x[1] for x in tmp[varname]]
         
@@ -132,7 +128,7 @@ class Payload(object):
             if f.endswith(".smug"):
                 if objnames[0] == 'ALLVARS' or startswithany(f,objnames):
                     if verbose:
-                        print os.path.join(self.folder,f)
+                        print(os.path.join(self.folder,f))
                     os.remove(os.path.join(self.folder,f))
                     num += 1
         return num
@@ -233,7 +229,7 @@ class Smuggler(object):
         ...will use the strings 'myobj' and 'myotherobj'
         """
         
-        for varname,var in kwargs.iteritems():
+        for varname,var in kwargs.items():
             #print "Trying to write var {}".format(varname)
             c = Contraband(varname,var)
             c.setfname(post=self.post)
@@ -257,11 +253,11 @@ if __name__ == '__main__':
     #Example one:
     HanSolo = Smuggler("C:\Smuggle")
     HanSolo.smuggle(foo="foo stuff", boo="boo stuff")
-    print HanSolo.passphrases()
+    print(HanSolo.passphrases())
     HanSolo.smuggle(foo="more foo stuff", boo="more boo stuff")
-    print HanSolo.flushpassphrases()
+    print(HanSolo.flushpassphrases())
     HanSolo.smuggle(foo="even more foo stuff", boo="even more boo stuff")
-    print HanSolo.passphrases()
+    print(HanSolo.passphrases())
     
     #Example two:
     HanSolo = Smuggler("C:\Smuggle")
@@ -282,6 +278,6 @@ if __name__ == '__main__':
     MyPayload = Payload("C:\Smuggle")
     VarTimeDict = MyPayload.asvartimedict2D()
     
-    for varname in VarTimeDict.keys():
-        for datetime in VarTimeDict[varname].keys():
-            print varname, datetime, VarTimeDict[varname][datetime]
+    for varname in list(VarTimeDict.keys()):
+        for datetime in list(VarTimeDict[varname].keys()):
+            print(varname, datetime, VarTimeDict[varname][datetime])

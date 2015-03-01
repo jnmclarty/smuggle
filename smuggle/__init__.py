@@ -1,1 +1,1 @@
-from core import Smuggler, Payload
+from smuggle.core import Smuggler, Payload
