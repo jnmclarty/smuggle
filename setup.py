@@ -7,8 +7,7 @@ def read(*paths):
     with open(os.path.join(*paths), 'r') as f:
         return f.read()
 
-v = '0.1rc2'
-print "Setting up smuggle"
+v = '0.2.0'
 
 setup(
   name = 'smuggle',

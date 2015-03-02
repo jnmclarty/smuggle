@@ -36,7 +36,7 @@ Usage
    
    MySmuggler.smuggle(MyList=aList,MyDict=aDict,NoteToSelf="This is cool")
    
-   print MySmuggler.passphrases()
+   print(MySmuggler.passphrases())
 
 Output
 ======
@@ -70,11 +70,12 @@ python file.
 Payload
 -------
 
-A payload is reference to looking at and using the catalogue features.
+A payload is a collection of organized pickles accessible via the catalogue functions.
 There are many plans to expand the catalogue system (eg. SQLite, keyword,
-time, etc.) which is currently limited to a very simple file naming convention
-which includes the time and date.  Payloads just scan the folder for ``.smug``
-files.  These files, are simply pickle files with the custom extension.
+time, etc.).  The current system is limited to a very simple file naming convention
+which includes the time and date.  Payloads just scan a folder for ``.smug``
+files.  These files, are simply pickle files.  No other changes are made to the file
+format.
 
 .. code:: python
 
@@ -89,8 +90,7 @@ Requirements
 
 Python
 ------
-Works on 2.7, untested on all other versions.
-It is expected to be ported to 3.4 soon, and likely 2.6 as well.
+Works on 2.6, 2.7, 3.3 and 3.4.
 
 Install (OSX, Linux, Posix)
 ===========================
@@ -106,15 +106,10 @@ Or manually (assuming all required modules are installed on your system)::
 Instructions for Windows
 ========================
 
-1) Make sure you have Python 2.7 and pip installed
-2) Open the command prompt: Start Menu > Accessories > Command Prompt
-3) Run the following command: ``pip install smuggle``
+1) Start Menu > Accessories > Command Prompt
+2) Run the following command: ``pip install smuggle``
 
-Testing
-=======
+Contributing
+============
 
-.. code::
-   
-   nosetests smuggle
-   
-   py.test --cov=smuggle --cov-report=term --cov-report=html
+Pull requests are welcome.  To test, use ``nosetests smuggle`` or ``py.test``.
