@@ -1,0 +1,9 @@
+[run]
+source = smuggle
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
+omit =
+    */python?.?/*
+    */site-packages/nose/*

@@ -6,6 +6,9 @@ python:
   - "3.3"
   - "3.4"
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-# install: PLEASE CHANGE ME
+install: pip install coveralls
 # command to run tests, e.g. python setup.py test
-script:  nosetests smuggle -s
+script:
+  - nosetests --with-coverage --cover-package=smuggle -s
+after_success:
+  - coveralls

@@ -3,6 +3,9 @@ Smuggle
 
 .. image:: https://travis-ci.org/jnmclarty/smuggle.svg?branch=master
     :target: https://travis-ci.org/jnmclarty/smuggle
+    
+.. image:: https://coveralls.io/repos/jnmclarty/smuggle/badge.svg 
+    :target: https://coveralls.io/r/jnmclarty/smuggle
 
 *Catalogue python pickles to reduce development and troubleshooting time.*
 
